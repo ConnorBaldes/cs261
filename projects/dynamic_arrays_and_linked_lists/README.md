@@ -1,19 +1,8 @@
-# Assignment 1
-
-This assignment is intended to get you up and running with some of the tools we'll be using in this course and also to start programming in C.  It should be very straightforward.  It has a few parts, described below.
-
-
 ## 1. Implement a dynamic array
 
-In our assignments this term, we'll be building up a library of data structure implementations in C.  The first data structure we'll implement is a [dynamic array](https://en.wikipedia.org/wiki/Dynamic_array).  We'll then be able to use this dynamic array implementation as a building block for many of the other data structures we'll explore in this course.
+A dynamic array is simply an array that automatically grows to meet the demand for capacity as new elements are added.  Specifically, a dynamic array is a structure that simply manages a regular array, and, whenever a new element is inserted into the dynamic array, it checks to see whether the underlying array has enough space to hold the new element.  If it does, the dynamic array simply inserts the new element.  If there isn't enough space, however, the dynamic array increases the size of the underlying array (typically doubling it in size), so that there's room for the new element.  If you've used a vector from the C++ STL, then you've used a dynamic array, since that's what a C++ vector is.
 
-As we'll explore in lecture, a dynamic array is simply an array that automatically grows to meet the demand for capacity as new elements are added.  Specifically, a dynamic array is a structure that simply manages a regular array, and, whenever a new element is inserted into the dynamic array, it checks to see whether the underlying array has enough space to hold the new element.  If it does, the dynamic array simply inserts the new element.  If there isn't enough space, however, the dynamic array increases the size of the underlying array (typically doubling it in size), so that there's room for the new element.  If you've used a vector from the C++ STL, then you've used a dynamic array, since that's what a C++ vector is.
-
-For this assignment, the interface for the dynamic array (i.e. the structures and the prototypes of functions a user of the dynamic array interacts with) is already defined for you in the file `dynarray.h`.  Your first task in this assignment is to implement definitions for the functions that comprise this interface in `dynarray.c`.
-
-**Importantly, you may not modify the interface definition with which you are provided.**  Specifically, do not modify any of the already-defined dynamic array function prototypes.  We will use a set of unit tests to test your implementation, and if you change the dynamic array interface, it will break these unit tests, thereby (negatively) affecting your grade.  Beyond the already-defined interface, though, feel free to add any additional functions or structures your dynamic array implementation needs.  For example, you might want to add a new function to resize the array when needed.  This would be fine.
-
-The dynamic array functions you'll need to implement are outlined briefly below.  All of these functions use a type called `struct dynarray`, which is defined in `dynarray.c` and represents the dynamic array itself.  For more details, including information on function parameters and expected return values, see the documentation provided in `dynarray.c`.
+The dynamic array functions you'll need to implement are outlined briefly below.  
 
   * **`dynarray_create()`** - This function should allocate, initialize, and return a pointer to a new dynamic array structure.
 
@@ -31,18 +20,12 @@ The dynamic array functions you'll need to implement are outlined briefly below.
 
 ## 2. Implement a singly-linked list
 
-The second data structure you'll implement, and also one that we'll also be able to use as a building block for many of the other data structures we'll implement this term, is the [linked list](https://en.wikipedia.org/wiki/Linked_list).  Specifically, you'll implement a singly-linked list.
-
 In general, a linked list is a data structure in which each data element is stored in its own *link* structure.  A linked list is a linear data structure, like an array, where the elements are stored in sequence.  Each link in a lined list holds exactly one data element and is allocated only when needed (i.e. when the data element it contains is inserted into the list).  In addition, each link in a linked list points to either one or two adjacent links in the list.  A singly-linked list, which you'll implement here, is a list where each link points only to the next link in the list.
 
-Again, the interface for the linked list (i.e. the structures and the prototypes of functions a user of the linked list interacts with) is already defined for you in the file `list.h`.  Your next task in this assignment is to implement definitions for the functions that comprise this interface in `list.c`.
-
-**Again, do not modify the interface definition with which you are provided.**  This will break the unit tests we use for testing, which will cause your grade to suffer.  You may still feel free to implement any additional functions you need beyond the ones defined in the interface.
 
 The linked list functions you'll need to implement are outlined briefly below.  The functions here will make use of two different structures:
   * **`struct link`** - This structure represents a single link in the linked list.  It has one field in which to store the data element associated with the link and one field that will point to the next link in the list.
   * **`struct list`** - This structure represents an entire list and contains a single field to represent the head of the list.  This is the structure with which the user of your list implementation will interact.
-As with the dynamic array, see `list.c`  information on function parameters, expected return values, etc. for the linked list interface.
 
   * **`list_create()`** - This function should allocate, initialize, and return a pointer to a new linked list structure.
 
@@ -82,9 +65,9 @@ It will be instructive here to look in `test.c` to see how functions are actuall
   * https://www.cprogramming.com/tutorial/function-pointers.html
   * https://www.learn-c.org/en/Function_Pointers
 
-## Testing your work
+## Testing work
 
-In addition to the skeleton code provided here, you are also provided with some application code in `test_dynarray.c` and `test_list.c` to help verify that your dynamic array and linked list implementations, respectively, are behaving the way you want them to.  In particular, the testing code calls the functions from `dynarray.c` and `list.c`, passing them appropriate arguments, and then prints the results.  You can use the provided `Makefile` to compile all of the code in the project together, and then you can run the testing code as follows:
+You have been provided with some application code in `test_dynarray.c` and `test_list.c` to help verify that your dynamic array and linked list implementations, respectively, are behaving the way you want them to.  In particular, the testing code calls the functions from `dynarray.c` and `list.c`, passing them appropriate arguments, and then prints the results.  You can use the provided `Makefile` to compile all of the code in the project together, and then you can run the testing code as follows:
 ```
 make
 ./test_dynarray
@@ -93,29 +76,3 @@ make
 Example output of these two testing programs using correct implementations of the dynamic array and linked list is provided in the `example_output/` directory.
 
 In order to verify that your memory freeing functions work correctly, it will be helpful to run the testing application through `valgrind`.
-
-
-## Grading criteria
-
-Your program **MUST** compile and run on `flip.engr.oregonstate.edu`, so make sure you have tested your work there before you make your final submission, since a program that compiles and runs in one environment may not compile and run in another.  **Assignments that do not compile on `flip` will receive a grade of 0.**  If you do not have an ENGR account, you can create one at https://teach.engr.oregonstate.edu/.
-
-The assignment is worth 100 total points, broken down as follows:
-
-  * 20 points: Signed up for Piazza
-
-  * 40 points: Correct dynamic array implementation
-    * 5 points: `dynarray_create()` correctly allocates and initializes a dynamic array
-    * 5 points: `dynarray_free()` correctly frees the memory allocated to a dynamic array
-    * 5 points: `dynarray_size()` returns the correct size of a dynamic array
-    * 10 points: `dynarray_insert()` correctly inserts a value into a dynamic array, resizing the array when appropriate
-    * 5 points: `dynarray_remove()` correctly removes a value from a dynamic array
-    * 5 points: `dynarray_get()` correctly returns a value from a dynamic array
-    * 5 points: `dynarray_set()` correctly updates a value in a dynamic array
-
-  * 40 points: Correct linked list implementation
-    * 5 points: `list_create()` correctly allocates and initializes a linked list
-    * 5 points: `list_free()` correctly frees the memory allocated to a linked list
-    * 5 points: `list_insert()` correctly inserts a value into a linked list
-    * 10 points: `list_remove()` correctly removes a value from a linked list
-    * 5 points: `list_position()` correctly returns the position of an element in a linked list
-    * 10 points: `list_reverse()` correctly reverses the order of the links in a linked list

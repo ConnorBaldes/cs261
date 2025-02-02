@@ -21,7 +21,7 @@ By completing this course and its projects, one will:
 ## Repository Structure
 The repository is structured around key projects that explore different data structures:
 ```
-[cs261/](./projects/) 
+cs261/ 
 │── README.md 
 │── .git/ 
 └── projects/ 
